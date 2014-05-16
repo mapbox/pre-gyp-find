@@ -1,7 +1,7 @@
 {
   "name": "pre-gyp-find",
   "description": "Helper module for loading a node-pre-gyp packaged native module",
-  "version" : "0.1.0",
+  "version" : "0.6.0",
   "keywords": [
     "native",
     "addon",
@@ -20,7 +20,7 @@
   "main": "./index.js",
   "dependencies": {
     "bindings":"1.2.0",
-    "pre-gyp-versioning":"~0.1.0"
+    "pre-gyp-versioning":"0.6.x"
   },
   "devDependencies": {
     "tap": "~0.4.9"
