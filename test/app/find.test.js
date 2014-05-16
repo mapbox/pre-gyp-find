@@ -10,7 +10,13 @@ test('Can find correct .node module', function(t) {
         // should throw because we are providing a fake .node binary
         var binding = pre_gyp_find('app1');
     } catch (err) {
-        t.ok(err.message.indexOf('app1.node, 1): no suitable image found') > -1);
+	    if (process.platform === 'win32') {
+		    t.ok(err.message.indexOf('not a valid Win32') > -1,err.message);
+		} else if (process.platform === 'darwin') {
+            t.ok(err.message.indexOf('app1.node, 1): no suitable image found') > -1,err.message);
+		} else {
+			console.error(err.message);
+		}
     }
     t.end();
 });
