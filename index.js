@@ -1,8 +1,16 @@
 var fs = require('fs');
-var existsSync = require('fs').existsSync || require('path').existsSync;
 var path = require('path');
 var versioning = require('pre-gyp-versioning')
 var bindings = require('bindings');
+
+var fileExistsSync = function(file_path) {
+   try {
+      return fs.statSync(file_path).isFile();
+   }
+   catch (err) {
+      return false;
+   }
+};
 
 module.exports = Binding;
 
@@ -10,7 +18,7 @@ function Binding(name,opts) {
     opts = opts || {};
     if (!opts.module_root) opts.module_root = bindings.getRoot(bindings.getFileName(__filename));
     var package_json_path = path.join(opts.module_root,'package.json');
-    if (!existsSync(package_json_path)) {
+    if (!fileExistsSync(package_json_path)) {
         throw new Error("package.json not found: expected at '" + package_json_path + "'");
     }
     var package_json = require(package_json_path);
